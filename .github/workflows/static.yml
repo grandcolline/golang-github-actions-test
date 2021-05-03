@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: check
-      uses: grandcolline/golang-github-actions@master
+      uses: grandcolline/golang-github-actions@fix/outputs
       with:
         run: fmt
         token: ${{ secrets.GITHUB_TOKEN }}
