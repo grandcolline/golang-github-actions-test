@@ -43,6 +43,8 @@ jobs:
   kekka:
     name: kekka
     needs: [echo]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
      - name: echo
        run: echo "hoge!"
