@@ -1,0 +1,41 @@
+name: Github Actions Test
+
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+    inputs:
+      APP_ENV:
+        description: ""
+        required: true
+        default: "dev"
+
+jobs:
+  migration:
+    name: migration
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    strategy:
+      # cf. https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
+      matrix:
+        include:
+          # NOTE: 環境や tfstate が増えたら matrix に追加していく
+          - ENV: "dev"
+            MESSAGE: "hello. dev!"
+          - ENV: "stg"
+            MESSAGE: "hello. stg!"
+          - ENV: "prd"
+            MESSAGE: "hello. prd!"
+      fail-fast: false
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: echo
+        run: echo "${{ matrix.MESSAGE }}"
