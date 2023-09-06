@@ -42,7 +42,7 @@ jobs:
 
   kekka:
     name: kekka
-    need: [echo]
+    needs: [echo]
     steps:
      - name: echo
        run: echo "hoge!"
